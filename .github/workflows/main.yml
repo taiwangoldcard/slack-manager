@@ -1,7 +1,7 @@
 name: Cron
 on: 
   schedule:
-  - cron: '*/5 * * * *'
+  - cron: '* * * * *'
 
 jobs:
   job1:
