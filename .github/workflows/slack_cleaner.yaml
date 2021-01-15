@@ -7,8 +7,16 @@ jobs:
   clean_slack:
     runs-on: ubuntu-latest
     # container: python:3.8
+      
     steps:
-      - name: Clean Slack
-        run: python main.py
-        env:
-          SLACK_OAUTH_ACCESS_TOKEN: ${{ secrets.SLACK_OAUTH_ACCESS_TOKEN }}
+    - uses: actions/checkout@master
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install requirements
+      run: pip install -r requirements.txt
+    - name: Clean Slack
+      run: python main.py
+      env:
+        SLACK_OAUTH_ACCESS_TOKEN: ${{ secrets.SLACK_OAUTH_ACCESS_TOKEN }}
