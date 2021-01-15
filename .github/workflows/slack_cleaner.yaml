@@ -4,7 +4,7 @@ on:
     - cron:  '*/5 * * * *'
 
 jobs:
-  clean_slack:
+  build:
     runs-on: ubuntu-latest
     # container: python:3.8
       
