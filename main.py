@@ -5,7 +5,7 @@ cleaner_config = [
     {
         "channel_name"          : "#line",
         "channel_id"            : "C01GPGFS61H",
-        "max_messages_allowed"  : 60
+        "max_messages_allowed"  : 100
     },
     {
         "channel_name"          : "#website-devops",
@@ -32,7 +32,7 @@ def _deleteLineHistory(channel_id, channel_name, max):
                     print("[" + channel_name +"] [deleting]: " + str(chat['text']))
                     client.chat_delete(channel=channel_id, ts=chat["ts"])
                     num_messages = num_messages - 1
-                    time.sleep(2)
+                    time.sleep(1)
 
 def listChannels():
     response = client.conversations_list()
