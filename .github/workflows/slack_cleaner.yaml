@@ -5,9 +5,10 @@ on:
 
 jobs:
   clean_slack:
-    name: "Cleaning Slack"
     runs-on: ubuntu-latest
-    run: python main.py
     # container: python:3.8
-    env:
-      SLACK_OAUTH_ACCESS_TOKEN: ${{ secrets.SLACK_OAUTH_ACCESS_TOKEN }}
+    steps:
+      - name: Clean Slack
+        run: python main.py
+        env:
+          SLACK_OAUTH_ACCESS_TOKEN: ${{ secrets.SLACK_OAUTH_ACCESS_TOKEN }}
