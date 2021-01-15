@@ -34,7 +34,6 @@ def _deleteLineHistory(channel_id, channel_name, max):
                     num_messages = num_messages - 1
                     time.sleep(2)
 
-
 def listChannels():
     response = client.conversations_list()
     conversations = response["channels"]
@@ -42,7 +41,6 @@ def listChannels():
         print(conversation['name'] + " " + conversation['purpose']['value'])
         print(conversation['num_members'])
 
-while True:
-    for channel in cleaner_config:
-        _deleteLineHistory(channel['channel_id'], channel['channel_name'] , channel['max_messages_allowed'])
-    time.sleep(30)
+
+for channel in cleaner_config:
+    _deleteLineHistory(channel['channel_id'], channel['channel_name'] , channel['max_messages_allowed'])
