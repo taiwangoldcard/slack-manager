@@ -1,0 +1,13 @@
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '*/5 * * * *'
+
+jobs:
+  clean_slack:
+    name: "Cleaning Slack"
+    runs-on: ubuntu-latest
+    run: python main.py
+    # container: python:3.8
+    env:
+      SLACK_OAUTH_ACCESS_TOKEN: ${{ secrets.SLACK_OAUTH_ACCESS_TOKEN }}
