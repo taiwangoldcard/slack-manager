@@ -45,10 +45,10 @@ def _deleteLineHistory(channel_id, channel_name, max):
                     num_messages = num_messages - 1
                     continue
 
-            print("[" + channel_name +"] [deleting]: " + str(chat['text']))
-            client.chat_delete(channel=channel_id, ts=chat["ts"])
-            time.sleep(1)
-            num_messages = num_messages - 1
+                print("[" + channel_name +"] [deleting]: " + str(chat['text']))
+                client.chat_delete(channel=channel_id, ts=chat["ts"])
+                time.sleep(1)
+                num_messages = num_messages - 1
 
 
 
