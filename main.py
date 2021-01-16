@@ -10,8 +10,13 @@ cleaner_config = [
     {
         "channel_name"          : "#website-devops",
         "channel_id"            : "C01AS4EGA3E",
-        "max_messages_allowed"  : 100
-    }
+        "max_messages_allowed"  : 50
+    },
+    # {
+    #     "channel_name"          : "#faq",
+    #     "channel_id"            : "C01E9KCCZUY",
+    #     "max_messages_allowed"  : 300
+    # },
 ]
 
 client = WebClient(token=os.environ['SLACK_OAUTH_ACCESS_TOKEN'])
@@ -26,13 +31,26 @@ def _deleteLineHistory(channel_id, channel_name, max):
         # iterate from the first message
         for chat in reversed(response['messages']):
             if num_messages > max:
-
                 # if threaded message 
-                if 'hidden' not in chat:
-                    print("[" + channel_name +"] [deleting]: " + str(chat['text']))
-                    client.chat_delete(channel=channel_id, ts=chat["ts"])
+                if 'thread_ts' in chat:
+                    thread = client.conversations_replies(ts=chat['thread_ts'], channel=channel_id)
+
+                    # delete all replies to the thread and the thread itself
+                    for reply in thread['messages']:
+                        if "hidden" not in reply:
+                            print("[" + channel_name +"] [deleting thread replies]: " + str(reply['text']))
+                            client.chat_delete(channel=channel_id, ts=reply["ts"])
+                            time.sleep(1)
+
                     num_messages = num_messages - 1
-                    time.sleep(1)
+                    continue
+
+            print("[" + channel_name +"] [deleting]: " + str(chat['text']))
+            client.chat_delete(channel=channel_id, ts=chat["ts"])
+            time.sleep(1)
+            num_messages = num_messages - 1
+
+
 
 def listChannels():
     response = client.conversations_list()
