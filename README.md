@@ -2,3 +2,4 @@
 
 # slack-manager
 Manage our slack
+Delete messages from a given channe
